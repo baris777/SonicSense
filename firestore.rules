@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    
+    // --- Validation Helpers ---
+    function isValidScore(data) {
+      return data.keys().hasAll(['userId', 'username', 'gameMode', 'score', 'timestamp', 'correctAnswers', 'totalQuestions']) 
+             && data.keys().size() >= 7 && data.keys().size() <= 9
+             && data.userId == request.auth.uid
+             && data.username is string && data.username.size() > 0 && data.username.size() <= 32
+             && data.gameMode in ['pitch', 'interval', 'imitate', 'vocal']
+             && data.score is number && data.score >= 0 && data.score <= 100
+             && data.correctAnswers is number
+             && data.totalQuestions is number
+             && (data.get('avgGap', 0) == null || data.get('avgGap', 0) is number)
+             && (data.get('tolerance', 0) == null || data.get('tolerance', 0) is number)
+             && data.timestamp == request.time;
+    }
+
+    function isValidPlayerStats(data) {
+      return data.keys().hasAll(['userId', 'username', 'gameMode', 'avgAccuracy', 'totalSessions', 'lastUpdated', 'totalCorrect', 'totalQuestions'])
+             && data.userId == request.auth.uid
+             && data.username is string && data.username.size() > 0 && data.username.size() <= 32
+             && data.gameMode in ['pitch', 'interval', 'imitate', 'vocal']
+             && data.avgAccuracy is number
+             && data.totalSessions is number
+             && data.totalCorrect is number
+             && data.totalQuestions is number
+             && (data.get('avgGap', 0) == null || data.get('avgGap', 0) is number)
+             && (data.get('avgTolerance', 0) == null || data.get('avgTolerance', 0) is number)
+             && data.lastUpdated == request.time;
+    }
+
+    function isValidUserProfile(data) {
+      return (!('vocalMin' in data) || data.vocalMin is number)
+             && (!('vocalMax' in data) || data.vocalMax is number)
+             && (!('proficiency' in data) || data.proficiency is map)
+             && (!('perfectPitchMappings' in data) || data.perfectPitchMappings is map)
+             && (!('updatedAt' in data) || data.updatedAt is timestamp);
+    }
+
+    // --- Leaderboard Rules ---
+    match /leaderboard/{scoreId} {
+      allow list: if true; // Public leaderboard
+      allow get: if true;
+      allow create: if isSignedIn() && isValidId(scoreId) && isValidScore(incoming());
+      allow update: if false;
+      allow delete: if isSignedIn() && (resource != null && resource.data.userId == request.auth.uid);
+    }
+
+    match /player_stats/{statsId} {
+      allow list: if true;
+      allow get: if true;
+      allow create, update: if isSignedIn() && isValidId(statsId) && isValidPlayerStats(incoming());
+      allow delete: if isSignedIn() && (statsId.matches('^' + request.auth.uid + '_.*') || (resource != null && resource.data.userId == request.auth.uid));
+    }
+
+    match /user_profiles/{userId} {
+      allow get: if isSignedIn() && userId == request.auth.uid;
+      allow create, update: if isSignedIn() && userId == request.auth.uid && isValidUserProfile(incoming());
+      allow delete: if isSignedIn() && userId == request.auth.uid;
+    }
+
+    // --- Safety & Compliance ---
+    match /user_reports/{reportId} {
+      allow create: if isSignedIn() 
+                    && incoming().keys().hasAll(['reportedUserId', 'reportedUsername', 'reporterUserId', 'timestamp', 'reason'])
+                    && incoming().reporterUserId == request.auth.uid
+                    && incoming().timestamp == request.time;
+      allow read, update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "Score": {
+      "title": "Score",
+      "description": "A leaderboard entry for a game session.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The unique ID of the user." },
+        "username": { "type": "string", "description": "The display name of the user." },
+        "gameMode": { "type": "string", "description": "The mode played ('pitch', 'interval', 'imitate', 'vocal')." },
+        "score": { "type": "number", "description": "Accuracy percentage (0-100)." },
+        "avgGap": { "type": "number", "description": "Average frequency gap in Hz (relevant for imitate/vocal)." },
+        "tolerance": { "type": "number", "description": "Frequency tolerance in Hz (relevant for pitch)." },
+        "correctAnswers": { "type": "number", "description": "Number of correct answers." },
+        "totalQuestions": { "type": "number", "description": "Total questions in session." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the score was achieved." }
+      },
+      "required": ["userId", "username", "gameMode", "score", "correctAnswers", "totalQuestions", "timestamp"]
+    },
+    "PlayerStats": {
+      "title": "PlayerStats",
+      "description": "Aggregate performance statistics for a player in a specific mode.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "gameMode": { "type": "string" },
+        "avgAccuracy": { "type": "number", "description": "Average accuracy across all sessions." },
+        "totalCorrect": { "type": "number", "description": "Cumulative correct answers across all sessions." },
+        "totalQuestions": { "type": "number", "description": "Cumulative total questions across all sessions." },
+        "avgGap": { "type": "number", "description": "Average gap across all sessions." },
+        "avgTolerance": { "type": "number", "description": "Average tolerance across all pitch sessions." },
+        "totalSessions": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "username", "gameMode", "avgAccuracy", "totalSessions", "lastUpdated", "totalCorrect", "totalQuestions"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User specific settings and profile information.",
+      "type": "object",
+      "properties": {
+        "vocalMin": { "type": "number", "description": "Minimum vocal range frequency." },
+        "vocalMax": { "type": "number", "description": "Maximum vocal range frequency." },
+        "perfectPitchMappings": { "type": "object", "description": "Mappings for mnemonic pitch training." },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "UserReport": {
+      "title": "UserReport",
+      "description": "Safety report for inappropriate display name or conduct.",
+      "type": "object",
+      "properties": {
+        "reportedUserId": { "type": "string" },
+        "reportedUsername": { "type": "string" },
+        "reporterUserId": { "type": "string" },
+        "reason": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["reportedUserId", "reportedUsername", "reporterUserId", "reason", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/leaderboard/{scoreId}": {
+      "schema": "Score",
+      "description": "Collection of game session scores."
+    },
+    "/player_stats/{statsId}": {
+      "schema": "PlayerStats",
+      "description": "Collection of aggregate player statistics for leadboard."
+    },
+    "/user_profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "User specific profile settings including vocal range."
+    },
+    "/user_reports/{reportId}": {
+      "schema": "UserReport",
+      "description": "Collection of user reports for moderation."
+    }
+  }
+}

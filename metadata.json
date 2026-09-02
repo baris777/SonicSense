@@ -1,0 +1,6 @@
+{
+  "name": "SonicSense Pro",
+  "description": "Professional-grade ear training for pitch discrimination, interval identification, and frequency matching.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
