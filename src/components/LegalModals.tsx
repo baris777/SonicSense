@@ -48,14 +48,14 @@ export const PrivacyPolicyModal: React.FC<ModalBaseProps> = ({ isOpen, onClose, 
             <div>
               <h3 className="text-gray-900 font-bold mb-1">1. Summary</h3>
               <p>
-                Earforge is dedicated to protecting your privacy. We collect only the minimum data required to synchronize your ear-training progression, leaderboard achievements, and user preferences across your devices.
+                HearEar is dedicated to protecting your privacy. We collect only the minimum data required to synchronize your ear-training progression, leaderboard achievements, and user preferences across your devices.
               </p>
             </div>
 
             <div>
               <h3 className="text-gray-900 font-bold mb-1">2. Audio Processing & Microphone Access</h3>
               <p>
-                When you use the Vocal Pitch Detection feature, Earforge accesses your microphone to perform real-time pitch detection (via the client-side Web Audio API / Tone.js) strictly on your device. <strong>No raw audio or voice recordings are ever saved, stored, recorded, transmitted, or uploaded to any remote server.</strong>
+                When you use the Vocal Pitch Detection feature, HearEar accesses your microphone to perform real-time pitch detection (via the client-side Web Audio API / Tone.js) strictly on your device. <strong>No raw audio or voice recordings are ever saved, stored, recorded, transmitted, or uploaded to any remote server.</strong>
               </p>
             </div>
 
@@ -141,7 +141,7 @@ export const TermsOfServiceModal: React.FC<ModalBaseProps> = ({ isOpen, onClose,
             <div>
               <h3 className="text-gray-900 font-bold mb-1">1. Acceptance of Terms</h3>
               <p>
-                By using Earforge, you agree to these Terms of Service. If you do not agree to these terms, please do not use the application.
+                By using HearEar, you agree to these Terms of Service. If you do not agree to these terms, please do not use the application.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ export const TermsOfServiceModal: React.FC<ModalBaseProps> = ({ isOpen, onClose,
             <div>
               <h3 className="text-gray-900 font-bold mb-1">4. Disclaimer of Warranty</h3>
               <p>
-                Earforge is provided "as is" without warranty of any kind. While engineered for scientific ear training precision, we do not guarantee specific musical proficiency outcomes.
+                HearEar is provided "as is" without warranty of any kind. While engineered for scientific ear training precision, we do not guarantee specific musical proficiency outcomes.
               </p>
             </div>
 
@@ -227,7 +227,7 @@ export const MicrophonePermissionModal: React.FC<ModalBaseProps & { onRetry: () 
           <div className="p-4 bg-green-900/5 rounded-2xl border border-green-900/10 mb-6 text-xs text-text-muted space-y-1">
             <p className="font-bold text-gray-900">{t.micPermissionSettingsHint}</p>
             <p>1. Open your browser or device Settings.</p>
-            <p>2. Find Earforge permissions and set Microphone to "Allow".</p>
+            <p>2. Find HearEar permissions and set Microphone to "Allow".</p>
           </div>
 
           <div className="flex gap-3">

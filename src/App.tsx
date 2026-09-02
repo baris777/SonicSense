@@ -205,7 +205,7 @@ const IntroView = ({ onFinish }: IntroViewProps) => (
       className="max-w-2xl"
     >
       <div className="text-accent-dark font-bold text-2xl tracking-[0.4em] mb-12">
-        EARFORGE
+        HearEar
       </div>
       
       <h1 className="text-4xl md:text-6xl font-extralight italic tracking-tight mb-8">
@@ -223,7 +223,7 @@ const IntroView = ({ onFinish }: IntroViewProps) => (
         onClick={onFinish}
         className="bg-accent-dark text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors"
       >
-        Enter Earforge
+        Enter HearEar
       </motion.button>
     </motion.div>
     
@@ -624,7 +624,7 @@ const HomeView = ({ onSelectMode, onOpenSettings, user, language }: HomeViewProp
     <div className="min-h-screen bg-bg-dark text-green-800 p-4 pt-24 md:pt-12 md:p-12 font-sans flex flex-col">
       <header className="hidden md:flex relative justify-between items-center mb-12 border-transparent">
         <div className="text-accent-dark font-bold text-xl tracking-[0.2em]">
-          EARFORGE
+          HearEar
         </div>
         <div className="relative flex items-center gap-4">
           {user && <span className="inline-block text-sm font-bold opacity-80">{user.displayName}</span>}
@@ -761,7 +761,7 @@ const Sidebar = ({
             >
               <div className="flex items-center justify-between mb-12">
                 <div className="text-accent-dark font-bold text-lg tracking-[0.2em]">
-                  EARFORGE
+                  HearEar
                 </div>
                 <button onClick={onClose} className="p-2 hover:bg-green-900/5 rounded-full transition-colors">
                   <Plus className="w-5 h-5 rotate-45 text-text-muted" />
@@ -1078,7 +1078,7 @@ export default function App() {
   // UGC Moderation / Blocked Users State
   const [blockedUsers, setBlockedUsers] = useState<string[]>(() => {
     try {
-      const saved = localStorage.getItem('earforge_blocked_users');
+      const saved = localStorage.getItem('HearEar_blocked_users');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -1143,7 +1143,7 @@ export default function App() {
             }
             if (data.blockedUsers) {
               setBlockedUsers(data.blockedUsers);
-              localStorage.setItem('earforge_blocked_users', JSON.stringify(data.blockedUsers));
+              localStorage.setItem('HearEar_blocked_users', JSON.stringify(data.blockedUsers));
             }
           }
         } catch (error) {
@@ -1251,7 +1251,7 @@ export default function App() {
       // 4. Wipe local preferences and mappings
       localStorage.removeItem('perfectPitchMappings');
       localStorage.removeItem('perfect_pitch_mappings');
-      localStorage.removeItem('earforge_blocked_users');
+      localStorage.removeItem('HearEar_blocked_users');
 
       // 5. Delete Firebase Auth User
       await deleteUser(user);
@@ -1306,7 +1306,7 @@ export default function App() {
   const handleBlockUser = async (userIdToBlock: string) => {
     const updated = [...blockedUsers, userIdToBlock];
     setBlockedUsers(updated);
-    localStorage.setItem('earforge_blocked_users', JSON.stringify(updated));
+    localStorage.setItem('HearEar_blocked_users', JSON.stringify(updated));
     setReportNotice(translations[language].userBlockedNotice);
     setTimeout(() => setReportNotice(null), 4000);
 
@@ -2084,7 +2084,7 @@ export default function App() {
               <Menu className="w-5 h-5 text-accent-dark" />
             </button>
             <div className="text-accent-dark font-bold text-lg tracking-[0.2em] absolute left-1/2 -translate-x-1/2">
-              EARFORGE
+              HearEar
             </div>
             <button 
               onClick={() => navigateTo('settings')}
@@ -2449,7 +2449,7 @@ export default function App() {
                   </p>
                 </div>
               </div>
-              <p className="text-xs md:text-sm text-text-muted mb-8 italic px-4">Integrate metrics into EarForge record?</p>
+              <p className="text-xs md:text-sm text-text-muted mb-8 italic px-4">Integrate metrics into HearEar record?</p>
               <div className="flex flex-col gap-3">
                 <button 
                   onClick={commitSession}
@@ -2669,7 +2669,7 @@ export default function App() {
           {/* Footer */}
           <footer className="hidden md:flex px-6 md:px-12 py-6 bg-white/90 border-t border-green-900/10 flex-wrap gap-6 justify-between items-center text-xs">
             <div className="flex-1 flex justify-center">
-               <p className="text-[10px] text-text-muted uppercase tracking-[0.2em] opacity-40">Earforge Precision Audio engine // v2.4</p>
+               <p className="text-[10px] text-text-muted uppercase tracking-[0.2em] opacity-40">HearEar Precision Audio engine // v2.4</p>
             </div>
           </footer>
         </motion.div>

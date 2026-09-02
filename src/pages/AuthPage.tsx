@@ -105,7 +105,7 @@ export default function AuthPage() {
       <div className="w-full max-w-md bg-card-dark p-8 md:p-10 rounded-[32px] border border-green-900/20 shadow-2xl">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold uppercase tracking-tight mb-2">
-            {isLogin ? 'Welcome Back' : 'Join EarForge'}
+            {isLogin ? 'Welcome Back' : 'Join HearEar'}
           </h2>
           <p className="text-text-muted text-sm">
             {isLogin ? 'Sign in to sync your progress' : 'Create an account to start training'}
