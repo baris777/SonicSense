@@ -101,7 +101,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-dark text-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-[100dvh] bg-bg-dark text-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-card-dark p-8 md:p-10 rounded-[32px] border border-green-900/20 shadow-2xl">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold uppercase tracking-tight mb-2">

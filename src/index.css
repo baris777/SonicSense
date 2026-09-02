@@ -113,3 +113,19 @@
   --font-sans: "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Courier New", ui-monospace, SFMono-Regular, monospace;
 }
+
+html, body {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  touch-action: manipulation;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

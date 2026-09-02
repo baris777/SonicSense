@@ -222,7 +222,7 @@ export const PerfectPitchModule: React.FC<PerfectPitchModuleProps> = ({ onBack, 
   };
 
   return (
-    <div className="min-h-screen bg-bg-dark text-gray-900 flex flex-col font-sans pt-16 md:pt-0">
+    <div className="min-h-[100dvh] bg-bg-dark text-gray-900 flex flex-col font-sans pt-16 md:pt-0">
       {/* Header */}
       <header className="relative px-4 md:px-12 py-2 md:py-6 flex justify-between items-center border-b border-green-900/10 bg-white/80 sticky top-16 md:top-0 z-40 md:z-50 backdrop-blur-md">
         {/* Left: Back Button */}

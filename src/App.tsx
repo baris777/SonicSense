@@ -198,7 +198,7 @@ interface SettingsViewProps {
 }
 
 const IntroView = ({ onFinish }: IntroViewProps) => (
-  <div className="min-h-screen bg-bg-dark text-gray-900 flex flex-col items-center justify-center p-6 text-center">
+  <div className="min-h-[100dvh] bg-bg-dark text-gray-900 flex flex-col items-center justify-center p-6 text-center">
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ const AuthView = ({
   const t = translations[language];
 
   return (
-  <div className="min-h-screen bg-bg-dark text-gray-900 flex flex-col items-center justify-center p-6">
+  <div className="min-h-[100dvh] bg-bg-dark text-gray-900 flex flex-col items-center justify-center p-6">
     <motion.div 
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -342,7 +342,7 @@ const SettingsView = ({
   const t = translations[language];
 
   return (
-  <div className="min-h-screen bg-bg-dark text-gray-900 p-6 pt-24 md:pt-12 md:p-12 pb-24">
+  <div className="min-h-[100dvh] bg-bg-dark text-gray-900 p-6 pt-24 md:pt-12 md:p-12 pb-24">
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center gap-4 mb-12">
         <button 
@@ -621,7 +621,7 @@ const HomeView = ({ onSelectMode, onOpenSettings, user, language }: HomeViewProp
   ];
 
   return (
-    <div className="min-h-screen bg-bg-dark text-green-800 p-4 pt-24 md:pt-12 md:p-12 font-sans flex flex-col">
+    <div className="min-h-[100dvh] bg-bg-dark text-green-800 p-4 pt-24 md:pt-12 md:p-12 font-sans flex flex-col">
       <header className="hidden md:flex relative justify-between items-center mb-12 border-transparent">
         <div className="text-accent-dark font-bold text-xl tracking-[0.2em]">
           HearEar
@@ -675,13 +675,13 @@ const HomeView = ({ onSelectMode, onOpenSettings, user, language }: HomeViewProp
                 <div className="flex gap-2 md:gap-3 mt-auto">
                   <button 
                     onClick={() => handleOpenInstruction(mode.id)}
-                    className="flex-1 py-2 md:py-3 px-2 md:px-4 rounded-xl border border-border-dark text-xs md:text-xs uppercase tracking-widest font-bold hover:bg-border-dark hover:text-gray-900 transition-colors text-text-muted text-center"
+                    className="flex-1 py-3 px-2 md:px-4 rounded-xl border border-border-dark text-xs md:text-xs uppercase tracking-widest font-bold hover:bg-border-dark hover:text-gray-900 transition-colors text-text-muted text-center"
                   >
                     {t.instructions}
                   </button>
                   <button 
                     onClick={() => onSelectMode(mode.id)}
-                    className="flex-1 py-2 md:py-3 px-2 md:px-4 rounded-xl bg-accent-dark text-white text-xs md:text-xs uppercase tracking-widest font-bold hover:bg-opacity-90 transition-colors text-center"
+                    className="flex-1 py-3 px-2 md:px-4 rounded-xl bg-accent-dark text-white text-xs md:text-xs uppercase tracking-widest font-bold hover:bg-opacity-90 transition-colors text-center"
                   >
                     {t.play}
                   </button>
@@ -768,7 +768,7 @@ const Sidebar = ({
                 </button>
               </div>
 
-              <nav className="space-y-2 flex-1">
+              <nav className="space-y-2 flex-1 overflow-y-auto no-scrollbar">
                 {menuItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = currentView === item.id;
@@ -2060,7 +2060,7 @@ export default function App() {
 
   // --- Main Render ---
   return (
-    <div className="relative min-h-screen bg-bg-dark">
+    <div className="relative min-h-[100dvh] bg-bg-dark">
       {/* Sidebar is only available in these views */}
       {(viewState === 'guide' || viewState === 'home' || viewState === 'app' || viewState === 'settings' || viewState === 'perfect_pitch') && (
         <>
@@ -2147,7 +2147,7 @@ export default function App() {
             />
           </motion.div>
         ) : viewState === 'guide' ? (
-          <motion.div key="guide" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-screen flex flex-col">
+          <motion.div key="guide" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-[100dvh] flex flex-col">
              <GuideView language={language} />
           </motion.div>
         ) : viewState === 'settings' ? (
@@ -2167,7 +2167,7 @@ export default function App() {
             />
           </motion.div>
         ) : viewState === 'perfect_pitch' ? (
-          <motion.div key="perfect_pitch" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-screen">
+          <motion.div key="perfect_pitch" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-[100dvh]">
             <PerfectPitchModule onBack={() => navigateTo('home')} language={language} />
           </motion.div>
         ) : viewState === 'home' ? (
@@ -2193,7 +2193,7 @@ export default function App() {
             key="app" 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
-            className="min-h-screen bg-bg-dark text-gray-800 font-sans flex flex-col"
+            className="min-h-[100dvh] bg-bg-dark text-gray-800 font-sans flex flex-col"
           >
             {/* Header */}
         <header className="relative px-4 md:px-12 py-2 md:py-6 flex justify-between items-center border-b border-green-900/10 bg-white/80 sticky top-16 md:top-0 z-40 md:z-50 backdrop-blur-md">
